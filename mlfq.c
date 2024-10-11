@@ -208,4 +208,30 @@ int rr(MLFQ_t* mlfq) {
         if (allQueuesEmpty) {
             break;
         }
- 
+    }
+    return 0; // Return success code
+}
+
+// Main function
+int main() {
+    MLFQ_t* mlfq = createMLFQ(); // Create a new MLFQ
+
+    // Add processes to the highest priority queue (Level 0)
+    addToQueue(mlfq, createProcess('A', 10), 0); // Process A with size 10
+    addToQueue(mlfq, createProcess('B', 30), 0); // Process B with size 30
+    addToQueue(mlfq, createProcess('C', 50), 0); // Process C with size 50
+
+    // Add processes to the second highest priority queue (Level 1)
+    addToQueue(mlfq, createProcess('D', 5), 1);  // Process D with size 5
+    addToQueue(mlfq, createProcess('E', 40), 1); // Process E with size 40
+    addToQueue(mlfq, createProcess('F', 30), 1); // Process F with size 30
+
+    // Add processes to the third highest priority queue (Level 2)
+    addToQueue(mlfq, createProcess('G', 20), 2); // Process G with size 20
+    addToQueue(mlfq, createProcess('H', 10), 2); // Process H with size 10
+    addToQueue(mlfq, createProcess('I', 40), 2); // Process I with size 40
+    
+    rr(mlfq); // Perform round-robin scheduling on the MLFQ
+
+    return 0;
+}
